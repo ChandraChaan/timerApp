@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598654806904",
+    "project_id": "timerapp-5e283",
+    "storage_bucket": "timerapp-5e283.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598654806904:android:456b851aa4cc6559c2f68d",
+        "android_client_info": {
+          "package_name": "com.chandrachaan.timerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598654806904-ncodqcnh8uo2sprmtavm931is6du96q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJdhmYHh992SPeywwah_N76kTqVJVpkOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598654806904-ncodqcnh8uo2sprmtavm931is6du96q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
