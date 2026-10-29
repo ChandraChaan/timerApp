@@ -1,5 +1,5 @@
 name: timerapp
-description: A timier application.
+description: Best Clock - a beautiful world clock, alarm, stopwatch and timer app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -36,7 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.13.1
   firebase_messaging: ^11.2.10
-  flutter_local_notifications: ^9.4.0
+  flutter_local_notifications: ^9.9.1
+  shared_preferences: ^2.0.13
+  timezone: ^0.8.0
 
 dev_dependencies:
   flutter_test:
