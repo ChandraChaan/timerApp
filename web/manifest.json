@@ -1,11 +1,11 @@
 {
-    "name": "timerapp",
-    "short_name": "timerapp",
+    "name": "Best Clock",
+    "short_name": "Best Clock",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A timier application.",
+    "background_color": "#0D0E12",
+    "theme_color": "#8B7CFF",
+    "description": "World clock, alarms, stopwatch and timer.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

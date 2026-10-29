@@ -1,55 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:timerapp/ui/screens/homepage.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description: 'This channel is used for important notifications.',
-    // description
-    importance: Importance.high,
-    playSound: true);
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('A bg message just showed up :  ${message.messageId}');
-}
+import 'app.dart';
+import 'services/messaging_service.dart';
+import 'services/notification_service.dart';
+import 'services/time_zone_service.dart';
+import 'state/app_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
+  TimeZoneService.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final notifications = NotificationService();
+  final launchPayload = await notifications.init();
 
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-  runApp(const MyApp());
-}
+  final services = AppServices(prefs: prefs, notifications: notifications);
+  runApp(ClockApp(services: services));
+  await services.start(launchPayload: launchPayload);
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Timer App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPage(),
-    );
+  // Push messages are optional; never let Firebase delay the clock.
+  if (await MessagingService.initFirebase()) {
+    MessagingService.listen(notifications, services.navigatorKey);
   }
 }
