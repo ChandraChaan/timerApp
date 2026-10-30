@@ -15,7 +15,8 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Pinned: the old Flutter 2.10 toolchain is not tested on newer images.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
