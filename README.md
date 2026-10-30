@@ -89,3 +89,7 @@ test/                unit and widget tests
 ## 🤝 Contributing
 
 Issues and pull requests are welcome! If you like the app, please **⭐ star the repo**. It helps others find it.
+
+## 📄 License
+
+[MIT](LICENSE) © Chandra ObulaReddy
