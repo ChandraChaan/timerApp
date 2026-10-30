@@ -1,78 +1,96 @@
-# Best Clock
+<div align="center">
 
-A beautiful, reliable clock app built with Flutter: world clock, alarms,
-stopwatch and timer in one place, with dark/light themes and custom accent
-colours.
+# ⏰ Best Clock
 
-## Features
+**A beautiful, reliable clock app for Android: world clock, alarms, stopwatch and timer, all in one place.**
 
-### Clock
-- Large analog clock face with a smooth sweeping (or ticking) second hand
-- Big digital time, date and your time zone / UTC offset
-- "Next alarm" banner showing when your next alarm rings
-- **World clock**: add any city on earth (curated popular cities plus every
-  IANA time zone), see its time, day/night, "Today/Tomorrow" and the hour
-  difference. Swipe to remove (with undo), long-press to reorder.
+[![Download APK](https://img.shields.io/badge/Download-APK-8B7CFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/ChandraChaan/timerApp/releases/latest/download/best-clock.apk)
+[![Latest release](https://img.shields.io/github/v/release/ChandraChaan/timerApp?style=for-the-badge&color=22C3A6)](https://github.com/ChandraChaan/timerApp/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/ChandraChaan/timerApp/release-apk.yml?style=for-the-badge)](https://github.com/ChandraChaan/timerApp/actions/workflows/release-apk.yml)
 
-### Alarm
-- Smooth wheel time picker (12 h or 24 h)
-- Repeat on any days, with Once / Weekdays / Weekends / Every day shortcuts
-- Labels, per-alarm snooze length (5–30 min) and vibration
-- Alarms ring through scheduled notifications even when the app is closed,
-  play on the alarm audio stream, keep sounding until dismissed and survive
-  reboots
-- Full-screen ringing page with **Dismiss** and **Snooze**
-- One-time alarms switch themselves off after ringing
-- "Rings in 7 h 30 min" summaries everywhere
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)
+[![Stars](https://img.shields.io/github/stars/ChandraChaan/timerApp?style=flat-square&color=FFB020)](https://github.com/ChandraChaan/timerApp/stargazers)
 
-### Stopwatch
-- Centisecond precision with a sweeping dial
-- Laps with fastest / slowest lap highlighted
-- Copy all laps to the clipboard
-- Keeps running when the app is closed and survives restarts
+<img src="docs/screenshots/banner.png" alt="Best Clock screenshots" width="100%"/>
 
-### Timer
-- Hours / minutes / seconds wheel, optional label
-- One-tap quick starts (1 min … 1 h) and recently used timers
-- Animated progress ring showing remaining time and when it ends
-- Pause, resume, cancel and **+1 min**
-- Rings via notification when the app is closed; full-screen "Time's up"
-  page with **Stop** and **+1 min**
+</div>
 
-### Settings
-- Theme: System / Light / Dark, plus a pure-black OLED mode
-- Six accent colours
-- Time format: System / 12-hour / 24-hour
-- Analog clock, seconds and smooth second hand toggles
-- Default snooze length and haptic feedback
+## 📥 Download
 
-Push messages from Firebase Cloud Messaging still work when Firebase is
-configured; the app runs fine without it.
+1. Download **[best-clock.apk](https://github.com/ChandraChaan/timerApp/releases/latest/download/best-clock.apk)** on your Android phone
+   (or pick a version from [Releases](https://github.com/ChandraChaan/timerApp/releases)).
+2. Open it and allow **Install unknown apps** if Android asks.
+3. Allow notifications so alarms and timers can ring.
 
-## Project structure
+## ✨ Features
+
+| | |
+|---|---|
+| 🕰️ **Clock** | Big analog face with a smooth sweeping second hand, digital time, date and your time zone |
+| 🌍 **World clock** | Add any city on earth, with day/night, "Today/Tomorrow" and hour differences. Swipe to remove, long-press to reorder |
+| ⏰ **Alarms** | Wheel time picker, repeat days, labels, snooze length, vibration. Rings even when the app is closed and after a reboot |
+| 😴 **Snooze & dismiss** | Full-screen ringing page; one-time alarms switch themselves off |
+| ⏱️ **Stopwatch** | Hundredths of a second, laps with fastest/slowest highlighted, copy laps; keeps running when the app is closed |
+| ⏳ **Timer** | Hours/minutes/seconds wheel, quick starts and recent timers, progress ring, pause / +1 min, full-screen "Time's up" |
+| 🎨 **Themes** | Dark, light, system and pure-black OLED modes, plus six accent colours |
+| ⚙️ **Settings** | 12/24-hour time, analog/digital clock, show seconds, default snooze, haptic feedback |
+
+## 📱 Screenshots
+
+<div align="center">
+
+| Clock | Alarms | New alarm | Stopwatch |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/screenshots/clock.png" width="200"/> | <img src="docs/screenshots/alarms.png" width="200"/> | <img src="docs/screenshots/alarm-editor.png" width="200"/> | <img src="docs/screenshots/stopwatch.png" width="200"/> |
+
+| Timer | Time's up | Settings | Light theme |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/screenshots/timer.png" width="200"/> | <img src="docs/screenshots/times-up.png" width="200"/> | <img src="docs/screenshots/settings.png" width="200"/> | <img src="docs/screenshots/light-theme.png" width="200"/> |
+
+</div>
+
+## 🛠️ Build it yourself
+
+Requires Flutter 2.10 (Dart 2.16) and Java 11.
+
+```sh
+git clone https://github.com/ChandraChaan/timerApp.git
+cd timerApp
+flutter pub get
+flutter test
+flutter run                  # run on a connected phone
+flutter build apk --release  # build/app/outputs/flutter-apk/app-release.apk
+```
+
+### Publishing a new release
+
+Every push builds the APK in GitHub Actions. To publish a downloadable release,
+bump `version` in `pubspec.yaml` and push a tag:
+
+```sh
+git tag v2.1.0
+git push origin v2.1.0
+```
+
+The workflow attaches `best-clock.apk` to a new GitHub Release.
+
+## 🗂️ Project structure
 
 ```
 lib/
-  main.dart                 bootstraps services and runs the app
-  app.dart                  MaterialApp + themes
-  core/                     formatting helpers and theme
-  models/                   Alarm, WorldCity (+ curated city list)
-  services/                 notifications, time zones, Firebase messaging
-  state/                    controllers (settings, alarms, stopwatch, timer,
-                            world clock) and the AppScope that exposes them
-  ui/screens/               Clock, Alarm, Stopwatch, Timer, Settings, ring page
-  ui/widgets/               analog clock, progress ring, wheel picker, ...
-test/                       unit and widget tests
+  main.dart          app start-up
+  app.dart           MaterialApp and themes
+  core/              formatting helpers and theme
+  models/            Alarm, WorldCity (+ curated city list)
+  services/          notifications, time zones, Firebase messaging
+  state/             controllers for settings, alarms, stopwatch, timer, world clock
+  ui/screens/        Clock, Alarm, Stopwatch, Timer, Settings, ringing page
+  ui/widgets/        analog clock, progress ring, wheel picker, ...
+test/                unit and widget tests
 ```
 
-## Development
+## 🤝 Contributing
 
-```sh
-flutter pub get
-flutter analyze
-flutter test
-flutter run
-```
-
-On Android 12+ make sure notifications (and "Alarms & reminders") are
-allowed for Best Clock so alarms can ring on time.
+Issues and pull requests are welcome! If you like the app, please **⭐ star the repo**. It helps others find it.
