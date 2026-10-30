@@ -1,8 +1,9 @@
 name: Build APK
 
 # Builds the Android APK on every push and pull request.
-# Pushing a tag like `v2.0.0` also publishes a GitHub Release with the APK
-# attached, so anyone can download and install it.
+# Builds of `main` (and `v*` tags) publish a GitHub Release named after the
+# version in pubspec.yaml (e.g. v2.0.0) with the APK attached, so anyone can
+# download and install it. Bump the version to publish a new release.
 on:
   push:
     branches: ['**']
@@ -55,12 +56,21 @@ jobs:
           name: best-clock-apk
           path: dist/best-clock.apk
 
+      - name: Read app version
+        id: version
+        run: |
+          version=$(grep '^version:' pubspec.yaml | sed 's/version: *//; s/+.*//')
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+
       - name: Publish GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          name: Best Clock ${{ github.ref_name }}
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: Best Clock ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || steps.version.outputs.tag }}
           files: dist/best-clock.apk
+          make_latest: true
           generate_release_notes: true
           body: |
             ## Download
