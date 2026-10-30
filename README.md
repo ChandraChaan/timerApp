@@ -66,15 +66,10 @@ flutter build apk --release  # build/app/outputs/flutter-apk/app-release.apk
 
 ### Publishing a new release
 
-Every push builds the APK in GitHub Actions. To publish a downloadable release,
-bump `version` in `pubspec.yaml` and push a tag:
-
-```sh
-git tag v2.1.0
-git push origin v2.1.0
-```
-
-The workflow attaches `best-clock.apk` to a new GitHub Release.
+Every push builds the APK in GitHub Actions. Every build of `main` publishes a
+GitHub Release named after the `version` in `pubspec.yaml` (for example
+`version: 2.1.0+3` → release `v2.1.0`) with `best-clock.apk` attached.
+To ship a new version, bump `version` and merge to `main`.
 
 ## 🗂️ Project structure
 
